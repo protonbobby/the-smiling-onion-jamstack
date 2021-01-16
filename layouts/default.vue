@@ -6,18 +6,18 @@
 </template>
 
 <script>
-import AppNav from "~/components/AppNav.vue";
+import AppNav from "~/components/AppNav.vue"
 
 export default {
   components: {
-    AppNav
-  }
-};
+    AppNav,
+  },
+}
 </script>
 
 <style>
 html {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Space Mono", monospace;
   font-size: 18px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -54,8 +54,14 @@ h1 {
   text-align: center;
 }
 
-img {
+section img {
   width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+
+.gallery-item {
+  padding-right: 30px;
 }
 
 video {

@@ -1,11 +1,13 @@
 import axios from "axios"
 let dynamicRoutes = () => {
   const routes = axios
-    .get("https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=20")
-    .then(res => {
-      return res.data.map(post => `/blog/${post.slug}`)
+    .get(
+      "https://http://thesmilingonion.com/wp-json/wp/v2/posts?page=1&per_page=20"
+    )
+    .then((res) => {
+      return res.data.map((post) => `/blog/${post.slug}`)
     })
-  console.log(routes)
+  console.log("Page Routes:", routes)
   return routes
 }
 
@@ -22,17 +24,17 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: process.env.npm_package_description || ""
-      }
+        content: process.env.npm_package_description || "",
+      },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",
         href:
-          "https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap"
-      }
-    ]
+          "https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap",
+      },
+    ],
   },
   /*
    ** Customize the progress-bar color
@@ -41,29 +43,30 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["~/assets/mixins.scss"],
+  css: ["~/assets/mixins.scss", "~/assets/fonts/space_mono.css"],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
     "~/plugins/posts.server.js",
     "~/plugins/tags.server.js",
-    "~/plugins/dateformat.js"
+    "~/plugins/dateformat.js",
   ],
   generate: {
-    routes: dynamicRoutes
+    routes: dynamicRoutes,
   },
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [],
+  buildModules: ["@nuxtjs/tailwindcss"],
   /*
    ** Build configuration
    */
+
   build: {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }
