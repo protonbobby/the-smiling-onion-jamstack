@@ -3,7 +3,12 @@
     class="max-h-8 max-w-xs shadow transform transition duration-500 hover:scale-105"
   >
     <a :href="`blog/${post.slug}`" class="group">
-      <img :src="post.featuredMedia" height="auto" aspect-ratio="16/9" />
+      <img
+        :src="post.featuredMedia"
+        height="auto"
+        aspect-ratio="16/9"
+        class="rounded-t"
+      />
       <!-- <div
         class="bg-cover bg-center"
         :style="`background-image: url(${post.featuredMedia}); height: 400px;`"
