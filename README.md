@@ -1,6 +1,6 @@
 # Headless Wordpress on the JAMstack
 
-> _A quick template to get you started using Headless WordPress_
+> The Smiling Onion on the JAMstack
 
 ### Deploy this Template
 

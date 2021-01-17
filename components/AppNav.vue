@@ -5,7 +5,7 @@
         <nuxt-link to="/about">About</nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/about">Simple & Easy</nuxt-link>
+        <nuxt-link to="/recipeGuidelines">Recipe Guidelines</nuxt-link>
       </li>
       <li>
         <nuxt-link exact to="/">
@@ -18,7 +18,7 @@
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/about">By Cuisine</nuxt-link>
+        <nuxt-link to="/pantry">Pantry</nuxt-link>
       </li>
       <li>
         <nuxt-link to="/about">By Diet</nuxt-link>

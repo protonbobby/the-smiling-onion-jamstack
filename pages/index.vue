@@ -8,8 +8,8 @@
         :key="post.id"
       />
     </main>
-    <!-- <aside>
-        <h2 class="tags-title">Tags</h2>
+    <aside>
+      <!-- <h2 class="tags-title">Tags</h2>
         <div class="tags-list">
           <ul>
             <li
@@ -22,8 +22,8 @@
               <span v-if="tag.id === selectedTag">✕</span>
             </li>
           </ul>
-        </div>
-      </aside> -->
+        </div> -->
+    </aside>
   </div>
 </template>
 
@@ -44,6 +44,9 @@ export default {
     posts() {
       return this.$store.state.posts
     },
+    // fullPosts() {
+    //   return this.$store.getters.getFullPosts
+    // },
     tags() {
       return this.$store.state.tags
     },

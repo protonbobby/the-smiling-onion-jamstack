@@ -1,8 +1,6 @@
-const siteURL = "http://thesmilingonion.com/"
+import pagesIndex from "../pages/wpPages.js"
 
-const pagesIndex = {
-  about: 10,
-}
+const siteURL = "http://thesmilingonion.com"
 
 export const state = () => ({
   posts: [],
@@ -22,8 +20,8 @@ export const mutations = {
     state.categories = categories
   },
   updatePages: (state, page) => {
-    state[page] = page
-  }
+    state["pages"][page.id] = page
+  },
 }
 
 export const actions = {
@@ -33,26 +31,39 @@ export const actions = {
     try {
       let posts = await fetch(
         `${siteURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       posts = posts
-        .filter(el => el.status === "publish")
-        .map(({ id, slug, title, excerpt, date, tags, categories, content, _embedded }) => ({
-          id,
-          slug,
-          title,
-          excerpt,
-          date,
-          featuredMedia: _embedded['wp:featuredmedia']['0'].source_url,
-          tags,
-          categories,
-          content
-        }))
+        .filter((el) => el.status === "publish")
+        .map(
+          ({
+            id,
+            slug,
+            title,
+            excerpt,
+            date,
+            tags,
+            categories,
+            content,
+            _embedded,
+          }) => ({
+            id,
+            slug,
+            title,
+            excerpt,
+            date,
+            featuredMedia: _embedded["wp:featuredmedia"]["0"].source_url,
+            tags,
+            categories,
+            //categories: _embedded["wp:term"],
+            content,
+          })
+        )
       commit("updatePosts", posts)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   },
-  
+
   async getTags({ state, commit }) {
     if (state.tags.length) return
 
@@ -64,19 +75,19 @@ export const actions = {
     try {
       let tags = await fetch(
         `${siteURL}/wp-json/wp/v2/tags?page=1&per_page=100&include=${allTags}`
-      ).then(res => res.json())
+      ).then((res) => res.json())
 
       tags = tags.map(({ id, name }) => ({
         id,
-        name
+        name,
       }))
 
       commit("updateTags", tags)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   },
-  
+
   async getCategories({ state, commit }) {
     if (state.categories.length) return
 
@@ -88,36 +99,31 @@ export const actions = {
     try {
       let categories = await fetch(
         `${siteURL}/wp-json/wp/v2/categories?page=1&per_page=100`
-      ).then(res => res.json())
+      ).then((res) => res.json())
 
       categories = categories.map(({ id, name, count }) => ({
         id,
         name,
-        count
+        count,
       }))
       commit("updateCategories", categories)
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
   },
-  
-  async getPage({state, commit},page){
-    if (state.pages[page]) return
 
+  async getPage({ state, commit }, wpPage) {
+    if (state.pages[wpPage]) return
     try {
       let page = await fetch(
-        `${siteURL}/wp-json/wp/v2/pages/${pagesIndex[page]}`
-      ).then(res => res.json())
+        `${siteURL}/wp-json/wp/v2/pages/${pagesIndex[wpPage]}`
+      ).then((res) => res.json())
 
-      page = page.map(({ id, slug, title, content }) => ({
-        id,
-        slug,
-        title,
-        content,
-      }))
-      commit("updatePages", page)
+      const { id, slug, title, content } = page
+
+      commit("updatePages", { id, slug, title, content })
     } catch (err) {
-      console.log(err)
+      console.error(err)
     }
-  }
+  },
 }

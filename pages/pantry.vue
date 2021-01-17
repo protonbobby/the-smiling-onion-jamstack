@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h2>About The Smiling Onion</h2>
+    <h2>Pantry</h2>
     <div v-html="page.content.rendered"></div>
   </div>
 </template>
@@ -8,13 +8,13 @@
 <script>
 import pagesIndex from "./wpPages.js"
 export default {
-  name: "AboutPage",
+  name: "Pantry",
   created() {
-    this.$store.dispatch("getPage", "about")
+    this.$store.dispatch("getPage", "pantry")
   },
   computed: {
     page() {
-      return this.$store.state.pages[pagesIndex["about"]]
+      return this.$store.state.pages[pagesIndex["pantry"]]
     },
   },
 }
