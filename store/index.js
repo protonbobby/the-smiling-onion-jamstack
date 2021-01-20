@@ -4,6 +4,12 @@ const siteURL = "http://thesmilingonion.com"
 
 export const state = () => ({
   posts: [],
+  pagination: {
+    totalRecords: 0,
+    totalPages: 0,
+    currentPage: 1,
+    perPage: 9,
+  },
   tags: [],
   categories: [],
   pages: {},
@@ -22,16 +28,25 @@ export const mutations = {
   updatePages: (state, page) => {
     state["pages"][page.id] = page
   },
+  updatePagination: (state, payload) => {
+    state["pagination"] = { ...state["pagination"], ...payload }
+  },
 }
 
 export const actions = {
   async getPosts({ state, commit, dispatch }) {
     // if (state.posts.length) return
+    let posts, totalRecords, totalPages
 
     try {
-      let posts = await fetch(
-        `${siteURL}/wp-json/wp/v2/posts?page=1&per_page=20&_embed=1`
-      ).then((res) => res.json())
+      posts = await fetch(
+        `${siteURL}/wp-json/wp/v2/posts?page=${state.pagination.currentPage}&per_page=${state.pagination.perPage}&_embed=1`
+      ).then((res) => {
+        totalRecords = res.headers.get("X-WP-Total")
+        totalPages = res.headers.get("X-WP-TotalPages")
+        return res.json()
+      })
+
       posts = posts
         .filter((el) => el.status === "publish")
         .map(
@@ -54,11 +69,12 @@ export const actions = {
             featuredMedia: _embedded["wp:featuredmedia"]["0"].source_url,
             tags,
             categories,
-            //categories: _embedded["wp:term"],
             content,
           })
         )
+
       commit("updatePosts", posts)
+      commit("updatePagination", { totalRecords, totalPages })
     } catch (err) {
       console.error(err)
     }

@@ -1,6 +1,6 @@
 <template>
-  <div class="m-8 flex justify-center ">
-    <main class="grid grid-flow-row grid-cols-3 gap-6">
+  <div class="m-8 grid  grid-flow-row grid-cols-12">
+    <main class="grid grid-flow-row grid-cols-3 gap-6 col-span-12">
       <card
         class="shadow max-w-xs"
         v-for="post in sortedPosts"
@@ -8,21 +8,36 @@
         :key="post.id"
       />
     </main>
-    <aside>
+    <aside class="col-span-0 ml-6 flex justify-center">
+      <div class="flex items-center flex-col">
+        <img
+          src="@/assets/photos/alana-cup.png"
+          alt="Some image"
+          class="rounded-full h-56 w-56 object-cover object-center flex items-center justify-center shadow-lg"
+        />
+        <h2 class="italic mt-2 text-red-700 text-2xl">
+          Hi, I'm Alana.
+        </h2>
+        <p class="text-sm">
+          Thanks for checking out my collection of gluten-free and vegetarian
+          recipes (with many grain-free, vegan, and dairy-free options) inspired
+          by the cuisines I like most :-)
+        </p>
+      </div>
       <!-- <h2 class="tags-title">Tags</h2>
-        <div class="tags-list">
-          <ul>
-            <li
-              @click="updateTag(tag)"
-              v-for="tag in tags"
-              :key="tag.id"
-              :class="[tag.id === selectedTag ? activeClass : '']"
-            >
-              <a>{{ tag.name }}</a>
-              <span v-if="tag.id === selectedTag">✕</span>
-            </li>
-          </ul>
-        </div> -->
+      <div class="tags-list">
+        <ul>
+          <li
+            @click="updateTag(tag)"
+            v-for="tag in tags"
+            :key="tag.id"
+            :class="[tag.id === selectedTag ? activeClass : '']"
+          >
+            <a>{{ tag.name }}</a>
+            <span v-if="tag.id === selectedTag">✕</span>
+          </li>
+        </ul>
+      </div> -->
     </aside>
   </div>
 </template>

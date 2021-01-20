@@ -1,6 +1,7 @@
 <template>
-  <footer>
-    <div class="flex justify-center border-t-2">
+  <footer class="border-t-2 flex items-center justify-between px-2">
+    <div>Copyright © {{ new Date().getFullYear() }} The Smiling Onion</div>
+    <div class="flex justify-center">
       <a
         href="https://www.facebook.com/thesmilingonion/"
         class="text-gray-700 hover:text-gray-800 m-2 "

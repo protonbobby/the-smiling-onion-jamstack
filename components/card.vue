@@ -1,34 +1,32 @@
 <template>
   <div
-    class="max-h-8 max-w-xs shadow transform transition duration-500 hover:scale-105"
+    class="rounded w-full shadow transform transition duration-500 hover:scale-105 flex flex-col justify-between"
   >
-    <a :href="`blog/${post.slug}`" class="group">
+    <a :href="`blog/${post.slug}`">
       <img
         :src="post.featuredMedia"
-        height="auto"
-        aspect-ratio="16/9"
-        class="rounded-t"
+        :alt="post.title.rendered"
+        class="rounded-t h-56 w-full object-cover object-center"
       />
-      <!-- <div
-        class="bg-cover bg-center"
-        :style="`background-image: url(${post.featuredMedia}); height: 400px;`"
-      ></div> -->
-      <h3 class="p-2">
-        <div class="text-center" v-html="post.title.rendered"></div>
-      </h3>
-      <div class="readmore slide flex justify-center flex-wrap mb-2">
-        <span
-          v-for="category in filterCategories(post.categories)"
-          :key="category.short"
-          class="tooltip px-2 mx-1 mb-1 inline-flex text-xs"
-        >
-          {{ category.short }}
-          <span class="tooltip-text bg-blue-200 p-3 -mt-6 -ml-6 rounded">{{
-            category.long
-          }}</span>
-        </span>
+      <div class="flex justify-center items-center flex-wrap px-4 h-16">
+        <h3 class="text-center" v-html="post.title.rendered"></h3>
       </div>
     </a>
+    <div class="text-center h-8">
+      <hr
+        class="border-0 h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"
+      />
+      <span
+        v-for="category in filterCategories(post.categories)"
+        :key="category.short"
+        class="tooltip lowercase text-gray-600 text-xs p-1"
+      >
+        {{ category.short }}
+        <span class="tooltip-text bg-blue-200 p-3 -mt-6 -ml-6 rounded">{{
+          category.long
+        }}</span>
+      </span>
+    </div>
   </div>
 </template>
 
@@ -90,54 +88,10 @@ export default {
   text-align: center;
   padding: 2px 6px;
   position: absolute;
+  white-space: nowrap;
   z-index: 100;
 }
 .tooltip:hover .tooltip-text {
   visibility: visible;
-}
-
-.readmore {
-  display: inline-block;
-  font-size: 9px;
-  text-transform: uppercase;
-  padding: 5px 15px;
-  letter-spacing: 2px;
-  position: relative;
-  font-weight: 700;
-  font-family: "Open Sans", serif;
-  color: #fff;
-  background: #fff;
-  width: 100%;
-}
-
-.slide {
-  position: relative;
-  background: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-  z-index: 1;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  transform: translateZ(0);
-  cursor: pointer;
-  &:hover {
-    color: #fff;
-  }
-  &:hover:before {
-    right: -1px;
-  }
-}
-.slide::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background: #000;
-  transition: right 0.3s ease;
-  z-index: -1;
-  top: -2px;
-  bottom: -2px;
-  left: -2px;
-  right: 108%;
-  backface-visibility: hidden;
 }
 </style>
