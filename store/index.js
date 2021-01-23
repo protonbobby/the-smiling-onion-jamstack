@@ -8,7 +8,7 @@ export const state = () => ({
     totalRecords: 0,
     totalPages: 0,
     currentPage: 1,
-    perPage: 9,
+    perPage: 25,
   },
   tags: [],
   categories: [],
@@ -17,7 +17,7 @@ export const state = () => ({
 
 export const mutations = {
   updatePosts: (state, posts) => {
-    state.posts = posts
+    state.posts.push(...posts)
   },
   updateTags: (state, tags) => {
     state.tags = tags
@@ -37,7 +37,7 @@ export const actions = {
   async getPosts({ state, commit, dispatch }) {
     // if (state.posts.length) return
     let posts, totalRecords, totalPages
-
+    console.log(state.pagination.currentPage, state.pagination.perPage)
     try {
       posts = await fetch(
         `${siteURL}/wp-json/wp/v2/posts?page=${state.pagination.currentPage}&per_page=${state.pagination.perPage}&_embed=1`
@@ -74,7 +74,15 @@ export const actions = {
         )
 
       commit("updatePosts", posts)
-      commit("updatePagination", { totalRecords, totalPages })
+      commit("updatePagination", {
+        totalRecords,
+        totalPages,
+        currentPage: state.pagination.currentPage + 1,
+      })
+
+      if (state.pagination.currentPage <= state.pagination.totalPages) {
+        dispatch("getPosts")
+      }
     } catch (err) {
       console.error(err)
     }

@@ -53,11 +53,13 @@ export default {
     return {
       selectedTag: null,
       activeClass: "active",
+      perPage: 9,
+      currentPage: 1,
     }
   },
   computed: {
     posts() {
-      return this.$store.state.posts
+      return this.$store.state.posts.slice(0, 3)
     },
     // fullPosts() {
     //   return this.$store.getters.getFullPosts
