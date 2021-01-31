@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <nav class="nav">
     <ul class="menu">
       <li>
         <nuxt-link to="/about">About</nuxt-link>
@@ -21,13 +21,10 @@
         <nuxt-link to="/pantry">Pantry</nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/about">By Diet</nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/about">By Type</nuxt-link>
+        <nuxt-link to="/about">Contact</nuxt-link>
       </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>

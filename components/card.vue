@@ -12,7 +12,7 @@
         <h3 class="text-center" v-html="post.title.rendered"></h3>
       </div>
     </a>
-    <div class="text-center h-8">
+    <!-- <div class="text-center h-8">
       <hr
         class="border-0 h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"
       />
@@ -23,44 +23,15 @@
       >
         {{ category.short }}
         <span class="tooltip-text bg-blue-200 p-3 -mt-6 -ml-6 rounded">{{
-          category.long
+          category.name
         }}</span>
       </span>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-const categoriesMap = {
-  0: {
-    long: "Gluten-Free",
-    short: "GF",
-  },
-  15: {
-    long: "Dairy-Free",
-    short: "DF",
-  },
-  16: {
-    long: "Vegan",
-    short: "V",
-  },
-  18: {
-    long: "Egg-Free",
-    short: "EF",
-  },
-  19: {
-    long: "Peanut & Tree Nut-Free",
-    short: "NF",
-  },
-  77: {
-    long: "Low FODMAP",
-    short: "LF",
-  },
-  101: {
-    long: "Grain-Free",
-    short: "GrF",
-  },
-}
+import dietGroups from "@/middleware/dietGroups"
 
 export default {
   name: "card",
@@ -70,12 +41,17 @@ export default {
       default: () => null,
     },
   },
+  data() {
+    return {
+      categoriesMap: dietGroups,
+    }
+  },
   methods: {
     filterCategories(categories) {
       let filteredCategories = categories
-        .filter((category) => categoriesMap[category])
-        .map((category) => categoriesMap[category])
-      filteredCategories.unshift(categoriesMap[0])
+        .filter((category) => this.categoriesMap[category])
+        .map((category) => this.categoriesMap[category])
+      filteredCategories.unshift(this.categoriesMap[0])
       return filteredCategories
     },
   },

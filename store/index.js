@@ -13,6 +13,8 @@ export const state = () => ({
   tags: [],
   categories: [],
   pages: {},
+  selectedCategories: "",
+  selectedTags: "",
 })
 
 export const mutations = {
@@ -25,6 +27,12 @@ export const mutations = {
   updateCategories: (state, categories) => {
     state.categories = categories
   },
+  updateSelectedCategories: (state, selectedCategories) => {
+    state.selectedCategories = selectedCategories
+  },
+  updateSelectedTags: (state, selectedTags) => {
+    state.selectedTags = selectedTags
+  },
   updatePages: (state, page) => {
     state["pages"][page.id] = page
   },
@@ -35,9 +43,14 @@ export const mutations = {
 
 export const actions = {
   async getPosts({ state, commit, dispatch }) {
-    // if (state.posts.length) return
+    if (
+      state.posts.length > 1 &&
+      state.posts.length === state.pagination.totalRecords
+    )
+      return
+
     let posts, totalRecords, totalPages
-    console.log(state.pagination.currentPage, state.pagination.perPage)
+
     try {
       posts = await fetch(
         `${siteURL}/wp-json/wp/v2/posts?page=${state.pagination.currentPage}&per_page=${state.pagination.perPage}&_embed=1`
@@ -149,5 +162,37 @@ export const actions = {
     } catch (err) {
       console.error(err)
     }
+  },
+
+  resetSelected({ commit }) {
+    commit("updateSelectedCategories", "")
+    commit("updateSelectedTags", "")
+  },
+}
+
+export const getters = {
+  // getTags(state) {
+  //   return state.tags.map((tag) => tag.name).toString()
+  // },
+  getFilteredPosts(state) {
+    if (!state.selectedTags && !state.selectedCategories) return state.posts
+    if (!state.selectedTags) {
+      return state.posts.filter((post) =>
+        post.categories.includes(state.selectedCategories.id)
+      )
+    }
+    if (!state.selectedCategories) {
+      return state.posts.filter((post) =>
+        post.tags.includes(state.selectedTags)
+      )
+    }
+    return state.posts.filter(
+      (post) =>
+        post.tags.includes(state.selectedTags) &&
+        post.categories.includes(state.selectedCategories.id)
+    )
+  },
+  searchResults(state, getters) {
+    return getters.getFilteredPosts.length || state.pagination.totalRecords
   },
 }

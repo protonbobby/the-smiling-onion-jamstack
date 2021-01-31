@@ -1,14 +1,16 @@
 <template>
-  <div class="m-8 grid  grid-flow-row grid-cols-12">
-    <main class="grid grid-flow-row grid-cols-3 gap-6 col-span-12">
-      <card
-        class="shadow max-w-xs"
-        v-for="post in sortedPosts"
-        :post="post"
-        :key="post.id"
-      />
-    </main>
-    <aside class="col-span-0 ml-6 flex justify-center">
+  <div>
+    <filter-recipes />
+    <div class="m-8 grid grid-flow-row grid-cols-12">
+      <main class="grid grid-flow-row grid-cols-3 gap-6 col-span-12">
+        <card
+          class="shadow max-w-xs"
+          v-for="post in sortedPosts"
+          :post="post"
+          :key="post.id"
+        />
+      </main>
+      <!-- <aside class="col-span-0 ml-6 flex justify-center">
       <div class="flex items-center flex-col">
         <img
           src="@/assets/photos/alana-cup.png"
@@ -23,10 +25,15 @@
           recipes (with many grain-free, vegan, and dairy-free options) inspired
           by the cuisines I like most :-)
         </p>
-      </div>
-      <!-- <h2 class="tags-title">Tags</h2>
+      </div> -->
+      <!-- <h2 class="tags-title">Categories</h2>
       <div class="tags-list">
         <ul>
+          <li v-for="(cat, i) in categories" :key="i">
+            <a>{{ cat.name }}</a>
+          </li>
+        </ul> -->
+      <!-- <ul>
           <li
             @click="updateTag(tag)"
             v-for="tag in tags"
@@ -36,18 +43,23 @@
             <a>{{ tag.name }}</a>
             <span v-if="tag.id === selectedTag">✕</span>
           </li>
-        </ul>
-      </div> -->
-    </aside>
+        </ul> -->
+      <!-- </div> -->
+      <!-- </aside> -->
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
 import card from "@/components/card.vue"
+import FilterRecipes from "@/components/FilterRecipes.vue"
+import dietGroups from "@/middleware/dietGroups"
 
 export default {
   components: {
     card,
+    FilterRecipes,
   },
   data() {
     return {
@@ -55,21 +67,21 @@ export default {
       activeClass: "active",
       perPage: 9,
       currentPage: 1,
+      categories: dietGroups,
     }
   },
   computed: {
+    ...mapGetters(["getFilteredPosts"]),
     posts() {
-      return this.$store.state.posts.slice(0, 3)
+      return this.$store.state.posts.slice(0, 9)
     },
-    // fullPosts() {
-    //   return this.$store.getters.getFullPosts
-    // },
     tags() {
       return this.$store.state.tags
     },
     sortedPosts() {
-      if (!this.selectedTag) return this.posts
-      return this.posts.filter((el) => el.tags.includes(this.selectedTag))
+      return this.getFilteredPosts.slice(0, 9)
+      // if (!this.selectedTag) return this.posts
+      // return this.posts.filter((el) => el.tags.includes(this.selectedTag))
     },
   },
   created() {
@@ -96,26 +108,26 @@ export default {
 //   grid-area: 1 / 2 / 2 / 3;
 // }
 
-a,
-a:active,
-a:visited {
-  text-decoration: none;
-  color: black;
-}
+// a,
+// a:active,
+// a:visited {
+//   text-decoration: none;
+//   color: black;
+// }
 
-a.readmore {
-  display: inline-block;
-  font-size: 11px;
-  text-transform: uppercase;
-  padding: 5px 15px;
-  letter-spacing: 2px;
-  position: relative;
-  color: #000;
-  font-weight: 700;
-  font-family: "Open Sans", serif;
-  border: 1px solid #ccc;
-  background: #fff;
-}
+// a.readmore {
+//   display: inline-block;
+//   font-size: 11px;
+//   text-transform: uppercase;
+//   padding: 5px 15px;
+//   letter-spacing: 2px;
+//   position: relative;
+//   color: #000;
+//   font-weight: 700;
+//   font-family: "Open Sans", serif;
+//   border: 1px solid #ccc;
+//   background: #fff;
+// }
 
 // .tags-title {
 //   background-color: #000;
@@ -164,42 +176,42 @@ a.readmore {
 //   }
 // }
 
-.active {
-  border: 1px solid #d44119;
-  background-color: #fae091 !important;
-}
+// .active {
+//   border: 1px solid #d44119;
+//   background-color: #fae091 !important;
+// }
 
-.slide {
-  position: relative;
-  background: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-  z-index: 1;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  transform: translateZ(0);
-  cursor: pointer;
+// .slide {
+//   position: relative;
+//   background: transparent;
+//   -webkit-transition: 0.3s ease;
+//   transition: 0.3s ease;
+//   z-index: 1;
+//   backface-visibility: hidden;
+//   perspective: 1000px;
+//   transform: translateZ(0);
+//   cursor: pointer;
 
-  &:hover {
-    color: #fff;
-  }
+//   &:hover {
+//     color: #fff;
+//   }
 
-  &:hover:before {
-    right: -1px;
-  }
-}
+//   &:hover:before {
+//     right: -1px;
+//   }
+// }
 
-.slide::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background: palevioletred;
-  transition: right 0.3s ease;
-  z-index: -1;
-  top: -2px;
-  bottom: -2px;
-  left: -2px;
-  right: 108%;
-  backface-visibility: hidden;
-}
+// .slide::before {
+//   content: "";
+//   display: block;
+//   position: absolute;
+//   background: palevioletred;
+//   transition: right 0.3s ease;
+//   z-index: -1;
+//   top: -2px;
+//   bottom: -2px;
+//   left: -2px;
+//   right: 108%;
+//   backface-visibility: hidden;
+// }
 </style>
