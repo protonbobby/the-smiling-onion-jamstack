@@ -1,5 +1,6 @@
 <template>
   <div>
+    <app-masthead />
     <filter-recipes />
     <div class="m-8 grid grid-flow-row grid-cols-12">
       <main class="grid grid-flow-row grid-cols-3 gap-6 col-span-12">
@@ -55,11 +56,13 @@ import { mapGetters } from "vuex"
 import card from "@/components/card.vue"
 import FilterRecipes from "@/components/FilterRecipes.vue"
 import dietGroups from "@/middleware/dietGroups"
+import AppMasthead from "~/components/AppMasthead.vue"
 
 export default {
   components: {
     card,
     FilterRecipes,
+    AppMasthead,
   },
   data() {
     return {

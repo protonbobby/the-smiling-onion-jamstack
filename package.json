@@ -1,8 +1,8 @@
 {
-  "name": "wp-nuxt",
+  "name": "the-smiling-onion",
   "version": "1.0.0",
-  "description": "Headless WordPress with Nuxt",
-  "author": "geoffgraham and sdras",
+  "description": "The Smiling Onion: Vegetarian and Gluten-free Recipes",
+  "author": "geoffgraham and sdras and protonbobby",
   "private": true,
   "scripts": {
     "dev": "nuxt",

@@ -1,6 +1,34 @@
 <template>
-  <section class="masthead">
-    <!-- <h1>{{ tagline }}</h1> -->
+  <section class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="flex items-center flex-col">
+      <img
+        src="@/assets/photos/alana-cup.png"
+        alt="Some image"
+        class="rounded-full h-56 w-56 object-cover object-center flex items-center justify-center shadow-inner"
+      />
+      <h2 class="italic mt-2 text-red-700 text-2xl">
+        Hi, I'm Alana.
+      </h2>
+      <p class="text-gray-600">
+        Thanks for checking out my collection of
+        <span
+          class="text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-green-500"
+        >
+          gluten-free & vegetarian
+        </span>
+        recipes (with many grain-free, vegan, and dairy-free options) inspired
+        by the cuisines I like most :-)
+      </p>
+    </div>
+
+    <!-- <h1 class="masthead text-6xl text-white font-bold mx-auto max-w-6xl">
+      <span
+        class="text-transparent bg-gradient-to-r bg-clip-text from-blue-500 to-green-500"
+      >
+        Vegetarian & Gluten-Free Recipes
+      </span>
+      <br />
+    </h1> -->
   </section>
 </template>
 

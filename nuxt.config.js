@@ -30,9 +30,13 @@ export default {
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+      },
+      {
         rel: "stylesheet",
         href:
-          "https://fonts.googleapis.com/css?family=Alata|Open+Sans&display=swap",
+          "https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Slab&display=swap",
       },
     ],
   },
@@ -43,7 +47,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["~/assets/mixins.scss", "~/assets/fonts/space_mono.css"],
+  css: ["~/assets/mixins.scss"],
   /*
    ** Plugins to load before mounting the App
    */

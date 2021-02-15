@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-nav />
-    <app-nav-secondary />
+    <!-- <app-nav-secondary /> -->
     <nuxt />
     <app-footer />
   </div>
@@ -23,9 +23,8 @@ export default {
 
 <style>
 html {
-  font-family: "Space Mono", monospace;
-  font-size: 18px;
-  word-spacing: 1px;
+  font-family: "Poppins", sans-serif;
+  /* font-size: 1rem; */
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -36,13 +35,11 @@ html {
 body {
   background-color: #fff;
 }
-
-h1,
+/* 
 h2,
 h3 {
-  font-family: "Alata", serif;
-  font-weight: normal;
-}
+  font-family: "Roboto Slab", serif;
+} */
 
 *,
 *:before,
@@ -54,20 +51,16 @@ h3 {
 .individual h3 {
   margin: 2em 0 25px;
 }
-
+/* 
 h1 {
   margin-bottom: 30px;
   text-align: center;
-}
+} */
 
 section img {
   width: 100%;
   height: 100%;
   border-radius: 4px;
-}
-
-.gallery-item {
-  padding-right: 30px;
 }
 
 video {

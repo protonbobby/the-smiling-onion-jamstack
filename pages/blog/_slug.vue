@@ -46,4 +46,8 @@ section {
 .date {
   text-align: center;
 }
+
+::v-deep .gallery-item {
+  padding-right: 30px;
+}
 </style>

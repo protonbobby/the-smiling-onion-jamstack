@@ -12,10 +12,11 @@
         <h3 class="text-center" v-html="post.title.rendered"></h3>
       </div>
     </a>
-    <!-- <div class="text-center h-8">
+    <div class="text-center h-8">
       <hr
         class="border-0 h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"
       />
+
       <span
         v-for="category in filterCategories(post.categories)"
         :key="category.short"
@@ -26,7 +27,7 @@
           category.name
         }}</span>
       </span>
-    </div> -->
+    </div>
   </div>
 </template>
 
