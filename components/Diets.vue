@@ -14,7 +14,7 @@
 export default {
   props: {
     diets: {
-      type: Array,
+      type: [Array, Object],
       default: () => [],
     },
   },

@@ -75,4 +75,7 @@ export default {
      */
     extend(config, ctx) {},
   },
+  tailwindcss: {
+    jit: true,
+  },
 }
