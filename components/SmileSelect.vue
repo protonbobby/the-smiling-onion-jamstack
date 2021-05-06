@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <label class="text-xs text-pink-500 py-1" for="smile-select">{{
-      label
-    }}</label>
-    <select v-model="selected" :name="label" id="smile-select">
+  <label class="block" for="smile-select">
+    <span class="text-gray-700">{{ label }}</span>
+    <select
+      v-model="selected"
+      :name="label"
+      clearable
+      id="smile-select"
+      class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    >
+      <option value="">--select--</option>
       <option
         v-for="item in items"
         :key="item.id"
@@ -14,7 +19,7 @@
         {{ item.name }}
       </option>
     </select>
-  </div>
+  </label>
 </template>
 
 <script>

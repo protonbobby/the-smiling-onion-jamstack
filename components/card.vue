@@ -1,18 +1,21 @@
 <template>
   <div
-    class="rounded w-full shadow transform transition duration-500 hover:scale-105 flex flex-col justify-between"
+    class="rounded shadow-md flex flex-col justify-between hover:ring-4 hover:ring-pink-600 hover:ring-opacity-50 "
   >
     <a :href="`blog/${post.slug}`">
       <img
         :src="post.featuredMedia"
         :alt="post.title.rendered"
-        class="rounded-t h-56 w-full object-cover object-center"
+        width="720"
+        loading="lazy"
+        height="960"
+        class="rounded-t object-cover object-center"
       />
       <div class="flex justify-center items-center flex-wrap px-4 h-16">
         <h3 class="text-center" v-html="post.title.rendered"></h3>
       </div>
     </a>
-    <div class="text-center h-8">
+    <!-- <div class="text-center h-8">
       <hr
         class="border-0 h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent"
       />
@@ -27,7 +30,7 @@
           category.name
         }}</span>
       </span>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -35,7 +38,7 @@
 import dietGroups from "@/middleware/dietGroups"
 
 export default {
-  name: "card",
+  name: "CardSlide",
   props: {
     post: {
       type: Object,

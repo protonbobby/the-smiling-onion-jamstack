@@ -174,6 +174,9 @@ export const getters = {
   // getTags(state) {
   //   return state.tags.map((tag) => tag.name).toString()
   // },
+  getLatestPost(state) {
+    return state.posts[5]
+  },
   getFilteredPosts(state) {
     if (!state.selectedTags && !state.selectedCategories) return state.posts
     if (!state.selectedTags) {
