@@ -1,7 +1,7 @@
 <template>
   <div class="space-x-2">
     <span
-      v-for="category in filterCategories(post.categories)"
+      v-for="category in filterCategories(diets)"
       :key="category.short"
       class="lowercase text-gray-600 text-xs p-1.5 rounded-full bg-yellow-400"
     >
@@ -15,7 +15,7 @@ import dietGroups from "@/middleware/dietGroups"
 
 export default {
   props: {
-    post: {
+    diets: {
       type: Object,
       default: () => null,
     },
@@ -36,5 +36,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped></style>

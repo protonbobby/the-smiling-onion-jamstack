@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapState, mapActions, mapGetters } from "vuex"
 import Swiper, { Navigation, Pagination } from "swiper"
 import "swiper/swiper-bundle.css"
 
@@ -159,12 +159,13 @@ export default {
     }
   },
   computed: {
+    ...mapState(["posts", "tags"]),
     ...mapGetters(["getFilteredPosts"]),
     posts() {
-      return this.$store.state.posts.slice(0, 24)
+      return this.posts.slice(0, 24)
     },
     tags() {
-      return this.$store.state.tags
+      return this.tags
     },
     sortedPosts() {
       return this.getFilteredPosts.slice(0, 4)
@@ -173,7 +174,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch("getPosts")
+    this.getPosts()
   },
   mounted() {
     new Swiper(".swiper-container", {
@@ -191,6 +192,7 @@ export default {
     })
   },
   methods: {
+    ...mapActions(["getPosts"]),
     updateTag(tag) {
       if (!this.selectedTag) {
         this.selectedTag = tag.id

@@ -42,9 +42,9 @@ import SmileButton from "./SmileButton.vue"
 export default {
   components: { card, SmileButton },
   computed: {
-    ...mapGetters(["getLatestPost"]),
+    ...mapGetters(["getLatestPosts"]),
     latestPost() {
-      return this.getLatestPost
+      return this.getLatestPosts
     },
   },
 }

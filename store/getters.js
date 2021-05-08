@@ -1,9 +1,11 @@
 export default {
-  // getTags(state) {
-  //   return state.tags.map((tag) => tag.name).toString()
-  // },
-  getLatestPost(state) {
-    return state.posts[5]
+  getPost(state) {
+    return (selectedPostSlug) => {
+      return state.posts.find((el) => el.slug === selectedPostSlug)
+    }
+  },
+  getLatestPosts(state) {
+    return state.posts[4]
   },
   getFilteredPosts(state) {
     if (!state.selectedTags && !state.selectedCategories) return state.posts
@@ -26,4 +28,7 @@ export default {
   searchResults(state, getters) {
     return getters.getFilteredPosts.length || state.pagination.totalRecords
   },
+  // getTags(state) {
+  //   return state.tags.map((tag) => tag.name).toString()
+  // },
 }
