@@ -9,9 +9,9 @@
         <!-- <div class="max-h-screen overflow-auto p-8 scroll-snap-y"> -->
         <!-- <div class="max-h-screen m-8 scroll-snap-center-align"> -->
         <!-- <div class="m-8 grid grid-flow-row grid-cols-12 scroll-snap-center-align"> -->
-        <div class="grid grid-flow-row grid-cols-4 gap-6 col-span-12">
-          <card
-            class="shadow"
+        <!-- <div class="grid grid-flow-row grid-cols-4 col-span-12"> -->
+        <div class="card">
+          <recipe-card
             v-for="post in sortedPosts"
             :post="post"
             :key="post.id"
@@ -129,14 +129,15 @@ import "swiper/swiper-bundle.css"
 
 Swiper.use([Navigation, Pagination])
 
+import dietGroups from "@/middleware/dietGroups"
 import card from "@/components/card.vue"
 import FilterRecipes from "@/components/FilterRecipes.vue"
-import dietGroups from "@/middleware/dietGroups"
 import AppMasthead from "~/components/AppMasthead.vue"
 import HeroLandingPage from "@/components/HeroLandingPage.vue"
 import WavyDivider from "@/components/WavyDivider.vue"
 import AppFooter from "@/components/AppFooter.vue"
 import CardSlide from "@/components/CardSlide"
+import RecipeCard from "@/components/RecipeCard"
 
 export default {
   components: {
@@ -148,6 +149,7 @@ export default {
     WavyDivider,
     AppFooter,
     card,
+    RecipeCard,
   },
   data() {
     return {
@@ -211,6 +213,16 @@ export default {
 </script>
 
 <style lang="scss">
+.card {
+  grid-template-columns: repeat(4, 1fr) !important;
+  display: grid;
+  /* grid-template-columns: repeat(2, minmax(0, 1fr) ); */
+  grid-gap: 17px;
+  list-style: none;
+  list-style-type: none;
+  margin: 17px 0 !important;
+}
+
 .swiper-container {
   width: calc(100vw - 4em);
   height: 9em;
