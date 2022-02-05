@@ -4,7 +4,7 @@
       GLUTEN-FREE & VEGETARIAN RECIPES
     </div>
     <div class="p-8">
-      <!-- <div class="max-h-screen overflow-auto p-8 scroll-snap-y"> -->
+      <!-- <div class="max-h-screen overflow-auto p-8 scroll-snap-y"> -->`
       <!-- <div class="max-h-screen m-8 scroll-snap-center-align"> -->
       <!-- <div class="m-8 grid grid-flow-row grid-cols-12 scroll-snap-center-align"> -->
       <div class="grid grid-flow-row grid-cols-4 gap-6 col-span-12">
@@ -14,7 +14,6 @@
     <section class="child"><h1>Three</h1></section>
     <section class="child"><h1>Four</h1></section>
   </div> -->
-
         <card
           class="shadow max-w-xs "
           v-for="post in sortedPosts"

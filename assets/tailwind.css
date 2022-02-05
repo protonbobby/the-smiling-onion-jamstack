@@ -1,4 +1,4 @@
-@layer utilities {
+/* @layer utilities {
   @variants responsive {
     .scroll-snap-none {
       scroll-snap-type: none;
@@ -13,4 +13,4 @@
       scroll-snap-align: center;
     }
   }
-}
+} */

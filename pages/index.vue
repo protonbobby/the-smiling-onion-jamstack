@@ -1,16 +1,22 @@
 <template>
-  <div class="parent">
-    <section>
-      <div class="text-lg text-center py-4 ">
-        GLUTEN-FREE & VEGETARIAN RECIPES
-      </div>
-      <div class="p-8">
-        <h2 class="text-2xl mb-2">Latest</h2>
-        <!-- <div class="max-h-screen overflow-auto p-8 scroll-snap-y"> -->
-        <!-- <div class="max-h-screen m-8 scroll-snap-center-align"> -->
-        <!-- <div class="m-8 grid grid-flow-row grid-cols-12 scroll-snap-center-align"> -->
-        <!-- <div class="grid grid-flow-row grid-cols-4 col-span-12"> -->
-        <div class="card">
+  <div class="h-screen mx-auto">
+    <curated-filters />
+  </div>
+  <!-- <section>
+      <div class="px-12">
+        <div class="flex justify-center width-auto align-center mt-10">
+          <h1 class="text-8xl">
+            The Smiling Onion
+          </h1>
+        </div>
+        <h2 class="text-2xl mb-2 px-12">Latest</h2> -->
+  <!-- <div class="max-h-screen overflow-auto p-8 scroll-snap-y"> -->
+  <!-- <div class="max-h-screen m-8 scroll-snap-center-align"> -->
+  <!-- <div class="m-8 grid grid-flow-row grid-cols-12 scroll-snap-center-align"> -->
+
+  <!-- <div
+          class="grid grid-flow-row-dense grid-cols-4 col-span-12 gap-2 px-12"
+        >
           <recipe-card
             v-for="post in sortedPosts"
             :post="post"
@@ -19,8 +25,12 @@
         </div>
       </div>
     </section>
-    <section></section>
-  </div>
+    <section>
+      <div class="text-center text-2xl py-4">
+        GLUTEN-FREE & VEGETARIAN RECIPES
+      </div>
+    </section>
+  </div> -->
   <!-- <hero-landing-page /> -->
   <!-- <filter-recipes /> -->
   <!-- <div class="section mx-8 space-y-10">
@@ -138,6 +148,7 @@ import WavyDivider from "@/components/WavyDivider.vue"
 import AppFooter from "@/components/AppFooter.vue"
 import CardSlide from "@/components/CardSlide"
 import RecipeCard from "@/components/RecipeCard"
+import CuratedFilters from "~/components/CuratedFilters.vue"
 
 export default {
   components: {
@@ -150,6 +161,7 @@ export default {
     AppFooter,
     card,
     RecipeCard,
+    CuratedFilters,
   },
   data() {
     return {
@@ -213,15 +225,15 @@ export default {
 </script>
 
 <style lang="scss">
-.card {
-  grid-template-columns: repeat(4, 1fr) !important;
-  display: grid;
-  /* grid-template-columns: repeat(2, minmax(0, 1fr) ); */
-  grid-gap: 17px;
-  list-style: none;
-  list-style-type: none;
-  margin: 17px 0 !important;
-}
+// .card {
+//   grid-template-columns: repeat(4, 1fr) !important;
+//   display: grid;
+//   /* grid-template-columns: repeat(2, minmax(0, 1fr) ); */
+//   grid-gap: 17px;
+//   list-style: none;
+//   list-style-type: none;
+//   margin: 17px 0 !important;
+// }
 
 .swiper-container {
   width: calc(100vw - 4em);

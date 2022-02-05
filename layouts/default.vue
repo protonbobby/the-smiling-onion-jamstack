@@ -1,6 +1,7 @@
 <template>
   <div>
     <app-nav />
+    <!-- <app-header /> -->
     <nuxt />
     <app-footer />
   </div>
@@ -9,11 +10,13 @@
 <script>
 import AppNav from "~/components/AppNav.vue"
 import AppFooter from "@/components/AppFooter.vue"
+import AppHeader from "~/components/AppHeader.vue"
 
 export default {
   components: {
     AppNav,
     AppFooter,
+    AppHeader,
   },
 }
 </script>

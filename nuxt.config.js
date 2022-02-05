@@ -10,7 +10,7 @@ let dynamicRoutes = () => {
 }
 
 export default {
-  mode: "universal",
+  ssr: true,
   /*
    ** Headers of the page
    */
@@ -78,7 +78,6 @@ export default {
     extend(config, ctx) {},
   },
   tailwindcss: {
-    jit: true,
     configPath: "tailwind.config.js",
   },
 }
