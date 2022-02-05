@@ -3,15 +3,13 @@
     :src="post.featuredMedia"
     :alt="post.title.rendered"
     loading="lazy"
-    width="230"
-    height="130"
     class="rounded object-cover object-center"
   />
 </template>
 
 <script>
 export default {
-  name: "CardSlide",
+  name: "oldcardslide",
   props: {
     post: {
       type: Object,

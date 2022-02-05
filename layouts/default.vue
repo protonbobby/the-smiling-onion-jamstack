@@ -2,7 +2,7 @@
   <div>
     <app-nav />
     <!-- <app-header /> -->
-    <nuxt />
+    <nuxt class="px-8 py-4" />
     <app-footer />
   </div>
 </template>

@@ -12,7 +12,7 @@ export default {
       return
 
     let posts, totalRecords, totalPages
-
+    // https://developer.wordpress.org/rest-api/using-the-rest-api/linking-and-embedding/
     try {
       posts = await fetch(
         `${siteURL}/wp-json/wp/v2/posts?page=${state.pagination.currentPage}&per_page=${state.pagination.perPage}&_embed=1`

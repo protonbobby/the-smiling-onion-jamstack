@@ -1,18 +1,35 @@
 <template>
   <div
-    class="rounded shadow-md flex flex-col justify-between hover:ring-4 hover:ring-pink-600 hover:ring-opacity-50 "
+    class="
+    rounded 
+    shadow 
+    hover:ring-4 
+    hover:ring-pink-600 
+    hover:ring-opacity-50
+    "
   >
     <a :href="`blog/${post.slug}`">
       <img
         :src="post.featuredMedia"
         :alt="post.title.rendered"
-        width="720"
         loading="lazy"
-        height="960"
-        class="rounded-t object-cover object-center"
+        class="
+        rounded-t 
+        object-cover 
+        object-center"
+        style="aspect-ratio: 4/3;"
       />
       <div class="flex justify-center items-center flex-wrap px-4 h-16">
-        <h3 class="text-center" v-html="post.title.rendered"></h3>
+        <h3
+          class="
+          text-gray-800
+          text-center 
+          line-clamp-2
+          text-lg
+          sm:text-base
+          lg:text-sm"
+          v-html="post.title.rendered"
+        />
       </div>
     </a>
     <!-- <div class="text-center h-8">
