@@ -1,9 +1,7 @@
 import axios from "axios"
 let dynamicRoutes = () => {
   const routes = axios
-    .get(
-      "https://http://thesmilingonion.com/wp-json/wp/v2/posts?page=1&per_page=20"
-    )
+    .get("https://thesmilingonion.com/wp-json/wp/v2/posts?page=1&per_page=20")
     .then((res) => {
       return res.data.map((post) => `/blog/${post.slug}`)
     })
@@ -12,7 +10,7 @@ let dynamicRoutes = () => {
 }
 
 export default {
-  mode: "universal",
+  ssr: true,
   /*
    ** Headers of the page
    */
@@ -38,6 +36,10 @@ export default {
         href:
           "https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Slab&display=swap",
       },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Sofia&display=swap",
+      },
     ],
   },
   /*
@@ -47,7 +49,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: ["~/assets/mixins.scss"],
+  css: ["~/assets/mixins.scss", "~/assets/tailwind.css"],
   /*
    ** Plugins to load before mounting the App
    */
@@ -64,7 +66,7 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/tailwindcss"],
+  buildModules: ["@nuxtjs/tailwindcss", "@nuxtjs/svg"],
   /*
    ** Build configuration
    */
@@ -76,6 +78,6 @@ export default {
     extend(config, ctx) {},
   },
   tailwindcss: {
-    jit: true,
+    configPath: "tailwind.config.js",
   },
 }

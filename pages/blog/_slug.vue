@@ -1,53 +1,61 @@
 <template>
-  <main class="post individual">
-    <h1 v-html="post.title.rendered"></h1>
-    <small class="date">{{ post.date | dateformat }}</small>
-    <section v-html="post.content.rendered"></section>
+  <main class="post prose prose-lg max-w-prose">
+    <div v-if="post">
+      <h1 v-html="post.title.rendered" class="section-header"></h1>
+      <div class="flex items-end justify-between">
+        <div class="space-y-2">
+          <diet-chips :diets="post.categories" />
+          <small class="text-gray-500">{{ post.date | dateformat }}</small>
+        </div>
+        <social-media :title="post.title.rendered" :link-to-post="linkToPost" />
+      </div>
+      <img :src="post.featuredMedia" loading="lazy" class="rounded" />
+      <section v-html="post.content.rendered" />
+    </div>
+    <div v-else>
+      Something went wrong
+    </div>
   </main>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
+import SocialMedia from "~/components/SocialMedia.vue"
+import DietChips from "~/components/DietChips.vue"
+
 export default {
+  name: "Recipe",
+  components: { SocialMedia, DietChips },
   computed: {
-    posts() {
-      return this.$store.state.posts
-    },
+    ...mapGetters(["getPost"]),
     post() {
-      return this.posts.find((el) => el.slug === this.slug)
+      return this.getPost(this.$route.params.slug)
     },
   },
   data() {
     return {
-      slug: this.$route.params.slug,
+      //const siteURL = "https://confident-cray-495abf.netlify.app/"
+      //linkToPost: `http://thesmilingonion.com${this.$route.fullPath}`,
+      linkToPost: `https://confident-cray-495abf.netlify.app${this.$route.fullPath}`,
     }
-  },
-  created() {
-    this.$store.dispatch("getPosts")
   },
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 main.post {
   margin: 60px auto 50px;
-  max-width: 800px;
   padding: 0 30px 70px;
 }
 
-h1 {
-  color: black;
-  font-size: 40px;
+.section-header {
+  font-family: "Sofia", sans-serif;
+  @apply text-4xl text-gray-600;
 }
 
-section {
-  color: #444;
-}
-
-.date {
-  text-align: center;
-}
-
+/*Overrides WP class*/
 ::v-deep .gallery-item {
-  padding-right: 30px;
+  @apply pr-2;
 }
 </style>

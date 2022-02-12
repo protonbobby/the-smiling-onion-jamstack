@@ -1,19 +1,102 @@
 <template>
-  <div>
-    <app-masthead />
-    <filter-recipes />
-    <div class="m-8 grid grid-flow-row grid-cols-12">
-      <main class="grid grid-flow-row grid-cols-3 gap-6 col-span-12">
-        <card
-          class="shadow max-w-xs"
-          v-for="post in sortedPosts"
-          :post="post"
-          :key="post.id"
-        />
-      </main>
-      <!-- <aside class="col-span-0 ml-6 flex justify-center">
+  <div class="h-screen mx-auto">
+    <curated-filters />
+  </div>
+  <!-- <section>
+      <div class="px-12">
+        <div class="flex justify-center width-auto align-center mt-10">
+          <h1 class="text-8xl">
+            The Smiling Onion
+          </h1>
+        </div>
+        <h2 class="text-2xl mb-2 px-12">Latest</h2> -->
+  <!-- <div class="max-h-screen overflow-auto p-8 scroll-snap-y"> -->
+  <!-- <div class="max-h-screen m-8 scroll-snap-center-align"> -->
+  <!-- <div class="m-8 grid grid-flow-row grid-cols-12 scroll-snap-center-align"> -->
+
+  <!-- <div
+          class="grid grid-flow-row-dense grid-cols-4 col-span-12 gap-2 px-12"
+        >
+          <recipe-card
+            v-for="post in sortedPosts"
+            :post="post"
+            :key="post.id"
+          />
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="text-center text-2xl py-4">
+        GLUTEN-FREE & VEGETARIAN RECIPES
+      </div>
+    </section>
+  </div> -->
+  <!-- <hero-landing-page /> -->
+  <!-- <filter-recipes /> -->
+  <!-- <div class="section mx-8 space-y-10">
+      <div>
+        <h2 class="text-2xl mb-2">Recent Recipes</h2> -->
+
+  <!-- Slider main container -->
+  <!-- <div class="swiper-container"> -->
+  <!-- <div class="swiper-pagination"></div> -->
+  <!-- Additional required wrapper -->
+  <!-- <div class="swiper-wrapper"> -->
+  <!-- Slides -->
+  <!-- <card-slide
+              v-for="post in sortedPosts"
+              :post="post"
+              :key="post.id"
+              class="swiper-slide"
+            /> -->
+  <!-- </div> -->
+  <!-- If we need pagination -->
+
+  <!-- If we need navigation buttons -->
+  <!-- <div class="swiper-button-prev"></div> -->
+  <!-- <div class="swiper-button-next"></div> -->
+  <!-- </div> -->
+
+  <!-- <div class="grid grid-flow-row grid-cols-4 gap-6">
+          <card
+            class="shadow max-w-xs"
+            posts.filter
+            v-for="post in sortedPosts"
+            :post="post"
+            :key="post.id"
+          />
+        </div> -->
+  <!-- </div> -->
+
+  <!-- <div> -->
+  <!-- <h2 class="text-2xl mb-2">Twists on the Classics</h2> -->
+  <!-- Slider main container -->
+  <!-- <div class="swiper-container"> -->
+  <!-- If we need pagination -->
+  <!-- <div class="swiper-pagination"></div> -->
+  <!-- Additional required wrapper -->
+  <!-- <div class="swiper-wrapper"> -->
+  <!-- Slides -->
+  <!-- <card-slide
+              v-for="post in sortedPosts"
+              :post="post"
+              :key="post.id"
+              class="swiper-slide"
+            />
+          </div> -->
+  <!-- If we need navigation buttons -->
+  <!-- <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </div> -->
+
+  <!-- <app-footer /> -->
+  <!-- </div> -->
+  <!-- <aside class="col-span-0 ml-6 flex justify-center">
       <div class="flex items-center flex-col">
         <img
+        loading="lazy"
           src="@/assets/photos/alana-cup.png"
           alt="Some image"
           class="rounded-full h-56 w-56 object-cover object-center flex items-center justify-center shadow-lg"
@@ -27,14 +110,14 @@
           by the cuisines I like most :-)
         </p>
       </div> -->
-      <!-- <h2 class="tags-title">Categories</h2>
+  <!-- <h2 class="tags-title">Categories</h2>
       <div class="tags-list">
         <ul>
           <li v-for="(cat, i) in categories" :key="i">
             <a>{{ cat.name }}</a>
           </li>
         </ul> -->
-      <!-- <ul>
+  <!-- <ul>
           <li
             @click="updateTag(tag)"
             v-for="tag in tags"
@@ -45,24 +128,40 @@
             <span v-if="tag.id === selectedTag">✕</span>
           </li>
         </ul> -->
-      <!-- </div> -->
-      <!-- </aside> -->
-    </div>
-  </div>
+  <!-- </div> -->
+  <!-- </aside> -->
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapState, mapActions, mapGetters } from "vuex"
+import Swiper, { Navigation, Pagination } from "swiper"
+import "swiper/swiper-bundle.css"
+
+Swiper.use([Navigation, Pagination])
+
+import dietGroups from "@/middleware/dietGroups"
 import card from "@/components/card.vue"
 import FilterRecipes from "@/components/FilterRecipes.vue"
-import dietGroups from "@/middleware/dietGroups"
 import AppMasthead from "~/components/AppMasthead.vue"
+import HeroLandingPage from "@/components/HeroLandingPage.vue"
+import WavyDivider from "@/components/WavyDivider.vue"
+import AppFooter from "@/components/AppFooter.vue"
+import CardSlide from "@/components/CardSlide"
+import RecipeCard from "@/components/RecipeCard"
+import CuratedFilters from "~/components/CuratedFilters.vue"
 
 export default {
   components: {
-    card,
+    Swiper,
+    CardSlide,
     FilterRecipes,
+    HeroLandingPage,
     AppMasthead,
+    WavyDivider,
+    AppFooter,
+    card,
+    RecipeCard,
+    CuratedFilters,
   },
   data() {
     return {
@@ -74,23 +173,40 @@ export default {
     }
   },
   computed: {
+    ...mapState(["posts", "tags"]),
     ...mapGetters(["getFilteredPosts"]),
     posts() {
-      return this.$store.state.posts.slice(0, 9)
+      return this.posts.slice(0, 24)
     },
     tags() {
-      return this.$store.state.tags
+      return this.tags
     },
     sortedPosts() {
-      return this.getFilteredPosts.slice(0, 9)
+      return this.getFilteredPosts.slice(0, 4)
       // if (!this.selectedTag) return this.posts
       // return this.posts.filter((el) => el.tags.includes(this.selectedTag))
     },
   },
   created() {
-    this.$store.dispatch("getPosts")
+    this.getPosts()
+  },
+  mounted() {
+    new Swiper(".swiper-container", {
+      slidesPerView: 5,
+      slidesPerGroup: 5,
+      spaceBetween: 4,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    })
   },
   methods: {
+    ...mapActions(["getPosts"]),
     updateTag(tag) {
       if (!this.selectedTag) {
         this.selectedTag = tag.id
@@ -98,11 +214,75 @@ export default {
         this.selectedTag = null
       }
     },
+    onSwiper(swiper) {
+      console.log(swiper)
+    },
+    onSlideChange() {
+      console.log("slide change")
+    },
   },
 }
 </script>
 
 <style lang="scss">
+// .card {
+//   grid-template-columns: repeat(4, 1fr) !important;
+//   display: grid;
+//   /* grid-template-columns: repeat(2, minmax(0, 1fr) ); */
+//   grid-gap: 17px;
+//   list-style: none;
+//   list-style-type: none;
+//   margin: 17px 0 !important;
+// }
+
+.swiper-container {
+  width: calc(100vw - 4em);
+  height: 9em;
+}
+h2 {
+  text-transform: uppercase;
+}
+.parent {
+  // style stuff
+
+  // set height + overflow
+  --scroll-gap: 2em;
+  height: calc(100vh - 4em);
+  overflow: auto;
+  // padding: var(--scroll-gap);
+
+  // set scroll snap 👇
+  // scroll-snap-type: y;
+}
+
+.section {
+  // set alignment 👇
+  scroll-snap-align: center;
+
+  // align content
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // set height
+  height: calc(100vh - 4em);
+}
+
+// .scroll-snap-type-y {
+//   scroll-snap-type: y;
+//   overflow: auto;
+//   height: calc(100vh - 4em);
+// }
+
+// .scroll-snap-align-center {
+//   scroll-snap-align: center;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: calc(100vh - 4em);
+// }
+
 // main {
 //   grid-area: 1 / 1 / 2 / 2;
 // }
@@ -217,4 +397,61 @@ export default {
 //   right: 108%;
 //   backface-visibility: hidden;
 // }
+
+.child {
+  // set alignment 👇
+  scroll-snap-align: center;
+
+  // align content
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // set height
+  height: calc(100vh - 4em);
+
+  // style stuff
+  // border-radius: 0.4em;
+  // padding: 1.25em;
+  // box-shadow: 0 0.9px 1.5px rgba(0, 0, 0, 0.03),
+  //   0 3.1px 5.5px rgba(0, 0, 0, 0.08), 0 14px 25px rgba(0, 0, 0, 0.12);
+
+  // grid gap
+  // &:not(:last-child) {
+  //   margin-bottom: var(--scroll-gap);
+  // }
+
+  // style stuff
+  &:nth-child(1) {
+    background-color: hsl(358, 65%, 55%);
+
+    h1 {
+      color: hsl(165, 100%, 96%);
+    }
+  }
+
+  &:nth-child(2) {
+    background-color: hsl(183, 46%, 74%);
+
+    h1 {
+      color: hsl(96, 20%, 5%);
+    }
+  }
+
+  &:nth-child(3) {
+    background-color: hsl(206, 46%, 37%);
+
+    h1 {
+      color: hsl(165, 100%, 96%);
+    }
+  }
+
+  &:nth-child(4) {
+    background-color: hsl(216, 49%, 22%);
+
+    h1 {
+      color: hsl(165, 100%, 96%);
+    }
+  }
+}
 </style>
