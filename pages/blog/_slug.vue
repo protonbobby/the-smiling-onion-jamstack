@@ -35,7 +35,9 @@ export default {
   },
   data() {
     return {
-      linkToPost: `http://thesmilingonion.com${this.$route.fullPath}`,
+      //const siteURL = "https://confident-cray-495abf.netlify.app/"
+      //linkToPost: `http://thesmilingonion.com${this.$route.fullPath}`,
+      linkToPost: `https://confident-cray-495abf.netlify.app${this.$route.fullPath}`,
     }
   },
 }

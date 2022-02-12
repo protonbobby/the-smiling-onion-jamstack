@@ -13,8 +13,11 @@ const state = () => ({
   tags: [],
   categories: [],
   pages: {},
-  selectedCategories: "",
-  selectedTags: "",
+  selectedCategories: [
+    { id: 8, name: "Baked Goods and Desserts", count: 45 },
+    { id: 15, name: "Dairy-Free", count: 111 },
+  ],
+  selectedTags: [],
 })
 
 export default {

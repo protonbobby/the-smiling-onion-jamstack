@@ -130,4 +130,14 @@ export default {
     commit(mutations.updateSelectedCategories, "")
     commit(mutations.updateSelectedTags, "")
   },
+
+  updateSelectedCategories({ commit }, dietFilters) {
+    const x = Object.entries(dietFilters)
+      .filter(([, v]) => v)
+      .map(([k]) => Number(k))
+
+    console.log(x)
+
+    commit(mutations.updateSelectedCategories, x)
+  },
 }

@@ -1,4 +1,11 @@
 export default {
+  vegetarian: {
+    name: "Vegetarian",
+    short: "vg",
+    disabled: false,
+    id: -1,
+    hashTag: "vegetarian",
+  },
   0: {
     name: "Gluten-Free",
     short: "GF",
@@ -6,17 +13,17 @@ export default {
     id: 0,
     hashTag: "glutenfree",
   },
-  15: {
-    name: "Dairy-Free",
-    short: "DF",
-    id: 15,
-    hashTag: "dairyfree",
-  },
   16: {
     name: "Vegan",
     short: "V",
     id: 16,
     hashTag: "vegan",
+  },
+  15: {
+    name: "Dairy-Free",
+    short: "DF",
+    id: 15,
+    hashTag: "dairyfree",
   },
   18: {
     name: "Egg-Free",

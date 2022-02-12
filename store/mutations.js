@@ -19,7 +19,7 @@ export default {
     state.categories = categories
   },
   [mutations.updateSelectedCategories]: (state, selectedCategories) => {
-    state.selectedCategories = selectedCategories
+    state.selectedCategories = [...selectedCategories]
   },
   [mutations.updateSelectedTags]: (state, selectedTags) => {
     state.selectedTags = selectedTags

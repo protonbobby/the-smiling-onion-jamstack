@@ -1,5 +1,5 @@
 <template>
-  <headroom>
+  <div>
     <nav class="bg-white shadow sticky top-0 z-10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-12">
@@ -249,7 +249,7 @@
       </li>
     </ul>
   </nav> -->
-  </headroom>
+  </div>
 </template>
 
 <script>
@@ -259,7 +259,7 @@ import AppIcon from "@/components/AppIcon.vue"
 
 export default {
   components: {
-    headroom,
+    // headroom,
     AppIcon,
   },
   data() {
